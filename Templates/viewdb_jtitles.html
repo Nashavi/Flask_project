@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    View entire Salary DB
+{% endblock %}
+
+{% block body %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <center><h1><b>View Entire Salary Database</b></h1></center>
+    <br>
+    <br>
+    <b>Select the role</b>
+    <form action = "{{url_for('home')}}" method = "post" >
+        <div class = "form-group">
+            <select class="form-control form-control-sm" name="job_title" >
+                {% for result in results %}
+                    <option value="{{result.JOB_TITLE}}">{{result.JOB_TITLE}}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            {% for salary in salaries %}
+                <h1>Salary details of Job Title:{{salary.JOB_TITLE}}</h1>
+                <ul>
+                    <li> Minimum Salary : {{salary.MIN_SALARY}}</li>
+                    <li> Maximum Salary : {{salary.MAX_SALARY}}</li>
+                </ul>
+            {% endfor %}
+        </div>
+    </form>
+
+    <br>
+    <form action = "{{url_for('home')}}" method = "post" >
+        <center> <button class="btn"> Back </button> </center>
+    </form>
+{% endblock %}

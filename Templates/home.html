@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Hello from salary checker
+{% endblock %}
+
+{% block body %}
+<h2><marquee><b>Welcome to Salary Checker!</b></marquee></h2>
+    <br>
+    <center><h3>Hello, {{name}}!</h3></center>
+    <br>
+    <center><h3>What would you like to do today</h3></center>
+
+    <form action = "{{url_for('viewDB')}}" method = "post" >
+        <br>
+        <center> <button class="btn btn-primary"> View all Salary DB </button> </center>
+    </form>
+
+    <form action = "{{url_for('postSalary')}}" method = "post" >
+        <br>
+        <center> <button class="btn btn-primary"> Provide my salary </button> </center>
+    </form>
+{% endblock %}

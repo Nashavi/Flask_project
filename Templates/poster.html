@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Post My Salary
+{% endblock %}
+
+{% block body %}
+    <br>
+    <center><h1> Post your salary </h1></center>
+    <br>
+    <br>
+    <form action = "{{url_for('posted')}}" method = "post" >
+        <br>
+        <div class = "form-group">
+                <br>
+                <b>Enter your job:</b>
+                <input class ="form-control" type = "text" name="poster job" placeholder="Your Job Title">
+                <br>
+                <b>Enter your minimum salary:</b>
+                <input class ="form-control" type="number" min="0" step="1" name="min salary" placeholder="0" maxlength="10">
+                <br>
+                <b>Enter your maximum salary:</b>
+                <input class ="form-control" type="number" min="1" step="1" name="max salary" placeholder="1000000000" maxlength="10">
+        </div>
+    <br>
+    <center> <button class="btn btn-primary"> Post </button> </center>
+
+{% endblock %}

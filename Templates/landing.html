@@ -1,0 +1,22 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sign up or Sign in
+{% endblock %}
+
+{% block body %}
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+    <center><b>Enter your name here:</b></center>
+    <form action = "{{url_for('home')}}" method = "post" >
+        <br>
+        <center><input type = "text"  name = "name"  placeholder=" "Enter your name here"  size="50"></center>
+        <br>
+        <center> <button class="btn btn-primary"> Submit </button> </center>
+    </form>
+
+{% endblock %}
