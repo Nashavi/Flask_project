@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request
 from flask_session import Session
 from sqlalchemy import create_engine
 from sqlalchemy.orm import scoped_session, sessionmaker
@@ -22,17 +22,16 @@ def home():
     name = request.form.get("name")
     return render_template('home.html',name = name)
 
-@app.route('/viewDB',methods = ["POST"])
+@app.route('/viewDB',methods = ["GET","POST"])
 def viewDB():
-    jobtitles = db.execute("SELECT DISTINCT(JOB_TITLE) from HR1.JOBS")
-    return render_template("viewdb.html",results = jobtitles)
-
-@app.route('/viewSalary/<jtitle>',methods = ["GET"])
-def viewSalary(jtitle):
-    jobtitles = db.execute("SELECT DISTINCT(JOB_TITLE) from HR1.JOBS")
-    print(jobtitles)
-    salaries = db.execute("SELECT DISTINCT(JOB_TITLE) from HR1.JOBS where JOBS.JOB_TITLE = :JOB_TITLE",{"JOB_TITLE":jtitle})
-    print(salaries)
+    jobtitles = db.execute("SELECT DISTINCT(JOB_TITLE) from HR1.JOBS").fetchall()
+    db.commit()
+    if request.method == "GET":
+        return render_template("viewdb_jtitles.html", results=jobtitles, salaries=[])
+    if request.method == "POST":
+        jtitle = request.form["job_title"]
+        salaries = db.execute("SELECT * from HR1.JOBS where JOBS.JOB_TITLE = :JTLE",{"JTLE":jtitle}).fetchall()
+        db.commit()
     return render_template("viewdb_jtitles.html",results=jobtitles, salaries=salaries)
 
 @app.route('/postSalary',methods = ["POST"])
